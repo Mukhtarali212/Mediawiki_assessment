@@ -1,15 +1,12 @@
 
 devKV_Name = "mediawiki-kv-dev" #### We have to change as per env
 
-## VNET - SUBNET
 rg_Name            = "Mediawiki-RG" ## We have to change as per env
 location           = "eastus2"
 vnet_Name          = "vnet-terraform-webserver-eus2"
 vnet_Address       = "10.0.0.0/16"
 wiki_pass          = "wiki-user-password"
 mysql_root_pass    = "mysql-root-password"
-
-### Linux Virtual Machine Deployment
 
 virtual_machine_Usr    = "virtual-machine-user"
 virtual_machine_Passwd = "virtual-machine-password"
