@@ -56,11 +56,15 @@ To run this example, simply follow to steps below:
   terraform plan
   terraform apply
 
-Explanation :
-Terraform init -> It initializes the directory and downloads required provider along with configuring the module.
-Terraform plan -> This helps you verify the code is going to deploy the resources as expected. This also ensures we don't face any unwanted surprise. This isn't mandatory, but a recommended step.
-Terraform apply -> This step applies the resources specified in this code. This will ask you to approve this later. We can skip manual approval by using --auto-approve parameter.
-Best Practices & Recommendations
-Use Terraform workspaces for easier management of the deployments. This can also help us manage Dev, UAT and Production deployments instead of creating multiple state files\directories. Additionally it helps us follow BlueGreen deployment.
-If you are creating new resources\variables. Ensure naming convention is easily relatable, since we have a lot of variables in this code.
-Use conditionals to avoid unwanted surprises and better error handling.
+### **Explanation :**
+
+1. Terraform init -> It initializes the directory and downloads required provider along with configuring the module.
+
+2. Terraform plan -> This helps you verify the code is going to deploy the resources as expected. This also ensures we don't face any unwanted surprise. This isn't mandatory, but a recommended step.
+
+3. Terraform apply -> This step applies the resources specified in this code. This will ask you to approve this later. We can skip manual approval by using --auto-approve parameter.
+
+### **Best Practices & Recommendations**
+
+1. Use Terraform workspaces for easier management of the deployments. This can also help us manage Dev, UAT and Production deployments instead of creating multiple state files\directories. Additionally it helps us follow BlueGreen deployment.
+
