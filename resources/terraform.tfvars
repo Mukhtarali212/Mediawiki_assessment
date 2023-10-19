@@ -1,7 +1,6 @@
 
-devKV_Name = "mediawiki-kv-dev" #### We have to change as per env
-
-rg_Name            = "Mediawiki-RG" ## We have to change as per env
+devKV_Name = "mediawiki-kv-dev" 
+rg_Name            = "Mediawiki-RG" 
 location           = "eastus2"
 vnet_Name          = "vnet-terraform-webserver-eus2"
 vnet_Address       = "10.0.0.0/16"
