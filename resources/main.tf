@@ -1,14 +1,12 @@
 terraform {
   backend "azurerm" {
-    #   subscription_id       = "da74xxxx-9c9a-xxxx-8fae-xxxxxxxxxxxx"
-    subscription_id      = "da74xxxx-9c9a-xxxx-8fae-xxxxxxxxxxx"
-    resource_group_name  = "ThoughtWorks"
-    storage_account_name = "thoughtworksmedia" # Storage account used for backend
+    resource_group_name  = "Mediawiki-RG"
+    storage_account_name = "mediawiki_Storage" 
     container_name       = "terraformstate"
-    key                  = "terraform.tfstate" # Terraform State file
+    key                  = "terraform.tfstate" 
   }
 }
-# Azurerm providers declaration
+
 terraform {
   required_providers {
     azurerm = {
@@ -19,8 +17,7 @@ terraform {
   #required_version = ">= 0.13"
 }
 provider "azurerm" {
-  alias                      = "thoughtworks-test"
-  subscription_id            = var.subscription_id
+  alias                      = "mediawiki-assessment"
   skip_provider_registration = true
   features {}
 }
@@ -30,12 +27,11 @@ provider "azurerm" {
   skip_provider_registration = true
 }
 
-### Data source for KV - to retrive the secrets from KV, declaring the existing KV details.
 data "azurerm_key_vault" "kv_name" {
   name                = var.devKV_Name
   resource_group_name = var.rg_Name
 }
-## To get object & tenant ID , declaring the data source. 
+ 
 data "azurerm_client_config" "current" {}
 
 
@@ -48,8 +44,6 @@ module "vnet01" {
   subnet_NameList    = var.subnet_NameList
   subnet_AddressList = var.subnet_AddressList
 }
-
-######### 2. Azure Linux Virtual Machine deployment #########
 
 data "azurerm_key_vault_secret" "virtual_machine_user" {
   name         = var.virtual_machine_Usr
@@ -128,8 +122,6 @@ resource "null_resource" "run-localexec" {
     command = "ansible-playbook  -i ${module.linux_vm.vm_instance_pip}, restart_services.yml --extra-vars 'ansible_user=${data.azurerm_key_vault_secret.virtual_machine_user.value} ansible_password=${data.azurerm_key_vault_secret.virtual_machine_passwd.value} ansible_sudo_pass=${data.azurerm_key_vault_secret.virtual_machine_passwd.value}'"
   }
 }
-
-
 
 output "linux_pip_address" {
   value       = module.linux_vm.vm_public_ip
